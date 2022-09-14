@@ -1,8 +1,6 @@
 <template>
   <h5>Default colors</h5>
-  <el-menu
-    background-color="#e8e8e8"
-    class="el-menu-vertical-demo"
+  <el-menu   background-color="#fff"
     default-active="2"
     @open="handleOpen"
     @close="handleClose"
