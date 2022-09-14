@@ -9,10 +9,10 @@ const useSettingStore = defineStore('setting', {
   getters: {},
   actions: {
     changeSetting() {
-      if(this.layout=='side'){
-        this.layout='top'
-      }else{
-        this.layout='side'
+      if (this.layout == 'side') {
+        this.layout = 'top';
+      } else {
+        this.layout = 'side';
       }
     }
   },

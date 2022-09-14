@@ -7,19 +7,19 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
-import {Setting} from '@element-plus/icons-vue';
+import { Setting } from '@element-plus/icons-vue';
 
 import { storeToRefs } from 'pinia';
-import {useSettingStore} from '@/store/index';
+import { useSettingStore } from '@/store/index';
 
 const settingStore = useSettingStore();
 
 const str = ref('header');
-const changeLayout=()=>{
-  settingStore.changeSetting()
-}
+const changeLayout = () => {
+  settingStore.changeSetting();
+};
 onMounted(() => {
-console.log();
+  console.log();
 });
 </script>
 <style lang="scss" scoped></style>

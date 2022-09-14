@@ -8,5 +8,5 @@ export default {
   isHeaderFixed: true, // 头部是否固定
   isUseTabsRouter: false, // 是否使用多标签页功能
   backgroundTheme: 'blueGrey',
-  brandTheme: 'default', // 主题色
+  brandTheme: 'default' // 主题色
 };

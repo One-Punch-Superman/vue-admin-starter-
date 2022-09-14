@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <div class="main">
-1111
-    </div>
+    <div class="main">1111</div>
   </div>
 </template>
 
@@ -19,6 +17,6 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .container {
-height: 1500px;
+  height: 1500px;
 }
 </style>
