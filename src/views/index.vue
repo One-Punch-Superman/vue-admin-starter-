@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="main">
-      <v-md-editor ref="previewRef" v-model="text"></v-md-editor>
+1111
     </div>
   </div>
 </template>
@@ -19,19 +19,6 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .container {
-  display: flex;
-  width: 1400px;
-  margin: 0 auto;
-  .main {
-    min-height: calc(100vh - 100px);
-    margin-right: 20px;
-    background-color: #fff;
-    box-shadow: 0 3px 10px 0 rgb(0 27 27 / 6%);
-    box-sizing: border-box;
-    flex: 1;
-    .v-md-editor {
-      min-height: calc(100vh - 100px);
-    }
-  }
+height: 1500px;
 }
 </style>
