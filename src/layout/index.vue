@@ -1,18 +1,30 @@
 <template>
   <div class="layout-container">
     <el-container v-if="layout === 'side'">
-      <el-header><Header /></el-header>
+      <el-header>
+        <Header />
+      </el-header>
       <el-container>
-        <el-aside width="250px"><Aside /></el-aside>
-        <el-main><Main /></el-main>
+        <el-aside width="250px">
+          <Aside />
+        </el-aside>
+        <el-main>
+          <Main />
+        </el-main>
       </el-container>
     </el-container>
 
     <el-container v-else>
-      <el-aside width="250px"><Aside /></el-aside>
+      <el-aside width="250px">
+        <Aside />
+      </el-aside>
       <el-container>
-        <el-header><Header /></el-header>
-        <el-main><Main /></el-main>
+        <el-header>
+          <Header />
+        </el-header>
+        <el-main>
+          <Main />
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -32,12 +44,15 @@ const { layout } = storeToRefs(settingStore);
 <style lang="scss" scoped>
 .layout-container {
   background: #eee;
+
   .el-header {
     background: #fff;
   }
+
   .el-aside {
-    background: #e8e8e8;
+    background: #fff;
   }
+
   .el-main {
     height: calc(100vh - 60px);
   }
