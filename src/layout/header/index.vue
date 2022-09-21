@@ -24,24 +24,19 @@
       </el-icon>
     </div>
   </div>
-  <SettingDrawer ref="drawerRef"></SettingDrawer>
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
 import { Setting, ArrowDown } from '@element-plus/icons-vue';
-import SettingDrawer from '@/layout/header/setting.vue';
-
-import { storeToRefs } from 'pinia';
 import { useSettingStore } from '@/store/index';
 
 const settingStore = useSettingStore();
 
-const str = ref('header');
-const drawerRef = ref();
 const changeLayout = () => {
-  drawerRef.value.showDrawer();
-  // settingStore.changeSetting();
+  settingStore.updateConfig({
+    isShowSetting: true
+  });
 };
 onMounted(() => {
   console.log();

@@ -1,8 +1,8 @@
 <template>
-  <div class="header-log">
-    <img width="136" src="https://www.tencent.com/img/index/menu_logo_hover.png" alt="logo" />
+  <div v-if="layout === 'side'" class="header-log">
+    <img width="180" src="https://www.tencent.com/img/index/menu_logo_hover.png" alt="logo" />
   </div>
-  <el-menu background-color="#fff" default-active="2" @open="handleOpen" @close="handleClose">
+  <el-menu background-color="#fff" default-active="2">
     <el-sub-menu index="1">
       <template #title>
         <el-icon>
@@ -39,10 +39,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
 import { Document, Menu as IconMenu, Location, Setting } from '@element-plus/icons-vue';
+import { storeToRefs } from 'pinia';
+import { useSettingStore } from '@/store';
 
-const str = ref('aside');
+const settingStore = useSettingStore();
+const { layout } = storeToRefs(settingStore);
 
 onMounted(() => {
   console.log();
@@ -53,6 +55,6 @@ onMounted(() => {
   height: 60px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  margin-left: 20px;
 }
 </style>
