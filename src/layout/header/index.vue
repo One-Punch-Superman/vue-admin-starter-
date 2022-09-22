@@ -1,5 +1,8 @@
 <template>
   <div class="layout-header">
+    <div v-if="layout !== 'side'" class="header-log">
+      <img width="180" src="https://www.tencent.com/img/index/menu_logo_hover.png" alt="logo" />
+    </div>
     <div class="but">header</div>
     <div class="menu"></div>
     <div class="info">
@@ -28,11 +31,12 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
 import { Setting, ArrowDown } from '@element-plus/icons-vue';
 import { useSettingStore } from '@/store/index';
 
 const settingStore = useSettingStore();
-
+const { layout } = storeToRefs(settingStore);
 const changeLayout = () => {
   settingStore.updateConfig({
     isShowSetting: true
@@ -65,5 +69,12 @@ onMounted(() => {
       cursor: pointer;
     }
   }
+}
+
+.header-log {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  width: 250px;
 }
 </style>

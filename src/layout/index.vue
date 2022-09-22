@@ -19,7 +19,7 @@
         <Header />
       </el-header>
       <el-container>
-        <el-aside width="250px">
+        <el-aside v-if="layout === 'mix'" width="250px">
           <Aside />
         </el-aside>
         <el-main>
@@ -53,6 +53,7 @@ const { layout } = storeToRefs(settingStore);
 
   .el-aside {
     background: #fff;
+    overflow: hidden;
   }
 
   .el-main {
