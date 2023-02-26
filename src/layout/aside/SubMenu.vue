@@ -2,17 +2,17 @@
   <template v-for="subItem in menuList" :key="subItem.path">
     <el-sub-menu v-if="subItem.children && subItem.children.length > 0" :index="subItem.path">
       <template #title>
-        <el-icon>
+        <!-- <el-icon>
           <component :is="subItem.icon"></component>
-        </el-icon>
+        </el-icon> -->
         <span>{{ subItem.title }}</span>
       </template>
       <SubMenu :menu-list="subItem.children" />
     </el-sub-menu>
     <el-menu-item v-else :index="subItem.path" @click="handleClickMenu(subItem)">
-      <el-icon>
+      <!-- <el-icon>
         <component :is="subItem.icon"></component>
-      </el-icon>
+      </el-icon> -->
       <template #title>
         <span>{{ subItem.title }}</span>
       </template>
@@ -37,19 +37,22 @@ const handleClickMenu = (subItem: Menu.MenuOptions) => {
 .el-menu--popup {
   .el-menu-item {
     &.is-active {
-      background-color: #1e7cda;
       color: #fff;
+      background-color: #1e7cda;
 
-      &::before {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 4px;
-        content: '';
-        background: var(--el-color-primary);
-      }
+      // &::before {
+      //   position: absolute;
+      //   top: 0;
+      //   bottom: 0;
+      //   left: 0;
+      //   width: 4px;
+      //   background: var(--el-color-primary);
+      //   content: '';
+      // }
     }
   }
+}
+.el-menu--horizontal > .el-menu-item.is-active {
+  color: #fff;
 }
 </style>

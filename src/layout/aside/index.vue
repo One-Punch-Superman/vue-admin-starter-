@@ -3,7 +3,7 @@
     <img width="180" src="https://www.tencent.com/img/index/menu_logo_hover.png" alt="logo" />
   </div>
   <el-scrollbar>
-    <el-menu background-color="#fff" :default-active="active">
+    <el-menu background-color="#fff" :default-active="active" :mode="layout === 'top' ? 'horizontal' : 'vertical'">
       <SubMenu :menu-list="menuList" />
     </el-menu>
   </el-scrollbar>
@@ -35,8 +35,5 @@ onMounted(() => {
   width: 230px;
   height: 60px;
   margin-left: 20px;
-}
-.el-menu {
-  height: calc(100vh - 60px);
 }
 </style>

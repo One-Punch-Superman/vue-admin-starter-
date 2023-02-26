@@ -3,7 +3,9 @@
     <div v-if="layout !== 'side'" class="header-log">
       <img width="180" src="https://www.tencent.com/img/index/menu_logo_hover.png" alt="logo" />
     </div>
-    <div class="but">header</div>
+    <div class="but" v-if="layout === 'top'">
+      <Aside />
+    </div>
     <div class="menu"></div>
     <div class="info">
       <el-avatar> user </el-avatar>
@@ -32,6 +34,7 @@
 <script lang="ts" setup>
 import { Setting, ArrowDown } from '@element-plus/icons-vue';
 import { useSettingStore } from '@/store/index';
+import Aside from '@/layout/aside/index.vue';
 
 const settingStore = useSettingStore();
 const { layout } = storeToRefs(settingStore);
