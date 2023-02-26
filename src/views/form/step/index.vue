@@ -2,7 +2,7 @@
   <div class="">{{ str }}</div>
 </template>
 <script lang="ts" setup>
-const str = ref('');
+const str = ref('分步表单页');
 
 onMounted(() => {
   console.log();

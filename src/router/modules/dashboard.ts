@@ -1,5 +1,6 @@
 import Layout from '@/layout/index.vue';
-import DashboardIcon from '@/assets/assets-slide-dashboard.svg';
+const DashboardBase = () => import('@/views/dashboard/base/index.vue');
+const DashboardDetail = () => import('@/views/dashboard/detail/index.vue');
 
 export default [
   {
@@ -7,18 +8,18 @@ export default [
     component: Layout,
     redirect: '/dashboard/base',
     name: 'dashboard',
-    meta: { title: '仪表盘', icon: DashboardIcon },
+    meta: { title: '仪表盘' },
     children: [
       {
         path: 'base',
         name: 'DashboardBase',
-        component: () => import('@/views/dashboard/base/index.vue'),
+        component: DashboardBase,
         meta: { title: '概览仪表盘' }
       },
       {
         path: 'detail',
         name: 'DashboardDetail',
-        component: () => import('@/views/dashboard/detail/index.vue'),
+        component: DashboardDetail,
         meta: { title: '统计报表' }
       }
     ]

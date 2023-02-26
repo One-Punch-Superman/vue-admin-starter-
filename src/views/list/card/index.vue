@@ -2,7 +2,7 @@
   <div class="">{{ str }}</div>
 </template>
 <script lang="ts" setup>
-const str = ref('');
+const str = ref('卡片列表页');
 
 onMounted(() => {
   console.log();

@@ -25,13 +25,12 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .header-log {
-  height: 60px;
   display: flex;
   align-items: center;
-  margin-left: 20px;
   width: 230px;
+  height: 60px;
+  margin-left: 20px;
 }
-
 .el-menu {
   height: calc(100vh - 60px);
 }

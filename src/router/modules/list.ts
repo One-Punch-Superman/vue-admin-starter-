@@ -1,6 +1,4 @@
 import Layout from '@/layout/index.vue';
-import ListIcon from '@/assets/assets-slide-list.svg';
-import FormIcon from '@/assets/assets-slide-form.svg';
 
 export default [
   {
@@ -8,7 +6,7 @@ export default [
     name: 'list',
     component: Layout,
     redirect: '/list/base',
-    meta: { title: '列表页', icon: ListIcon },
+    meta: { title: '列表页' },
     children: [
       {
         path: 'base',
@@ -35,7 +33,7 @@ export default [
     name: 'form',
     component: Layout,
     redirect: '/form/base',
-    meta: { title: '表单页', icon: FormIcon },
+    meta: { title: '表单页' },
     children: [
       {
         path: 'base',
