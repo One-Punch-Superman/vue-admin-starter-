@@ -30,8 +30,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
-import { storeToRefs } from 'pinia';
 import { Setting, ArrowDown } from '@element-plus/icons-vue';
 import { useSettingStore } from '@/store/index';
 
@@ -48,33 +46,28 @@ onMounted(() => {
 </script>
 <style lang="scss" scoped>
 .layout-header {
-  height: 100%;
   display: flex;
   align-items: center;
-
+  height: 100%;
   .menu {
     flex: 1;
   }
-
   .info {
     display: flex;
     align-items: center;
-
     .el-dropdown {
-      margin-left: 5px;
       margin-right: 15px;
+      margin-left: 5px;
     }
-
     .el-icon {
       cursor: pointer;
     }
   }
 }
-
 .header-log {
-  height: 60px;
   display: flex;
   align-items: center;
   width: 250px;
+  height: 60px;
 }
 </style>
