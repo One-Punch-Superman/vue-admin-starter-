@@ -2,7 +2,8 @@ import { defineStore } from 'pinia';
 import store from '@/store';
 
 const InitUserInfo = {
-  roles: []
+  name: '',
+  roles: ['']
 };
 
 export const useUserStore = defineStore('user', {
@@ -14,8 +15,25 @@ export const useUserStore = defineStore('user', {
   },
   getters: {},
   actions: {
-    async login() {},
-    async getUserInfo() {},
+    async login() {
+      const response = {
+        code: 200,
+        message: '登陆成功',
+        data: 'token_***'
+      };
+      this.token = response.data;
+    },
+    async getUserInfo() {
+      const response = {
+        code: 200,
+        message: '请求成功',
+        data: {
+          name: 'CMZ',
+          roles: ['admin']
+        }
+      };
+      this.userInfo = response.data;
+    },
     async logout() {
       this.token = '';
       this.userInfo = { ...InitUserInfo };

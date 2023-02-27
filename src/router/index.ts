@@ -54,6 +54,7 @@ router.beforeEach(async (to, from, next) => {
   if (token) {
     if (to.path === '/login') {
       next();
+      NProgress.done();
       return;
     }
     try {
@@ -63,6 +64,7 @@ router.beforeEach(async (to, from, next) => {
       } else {
         next(`/`);
       }
+      NProgress.done();
     } catch (error) {
       next({
         path: '/login',
