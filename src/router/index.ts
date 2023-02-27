@@ -12,11 +12,9 @@ Object.keys(modules).forEach((key) => {
   routeModuleList.push(...modList);
 });
 
-// 存放动态路由
-export const asyncRouterList: Array<RouteRecordRaw> = [...routeModuleList];
+export const moduleRouter: Array<RouteRecordRaw> = [...routeModuleList];
 
-// 存放固定的路由
-const defaultRouterList: Array<RouteRecordRaw> = [
+const defaultRouter: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'login',
@@ -33,7 +31,7 @@ const defaultRouterList: Array<RouteRecordRaw> = [
   }
 ];
 
-export const allRoutes = [...defaultRouterList, ...asyncRouterList];
+export const allRoutes = [...defaultRouter, ...moduleRouter];
 
 const whiteRouters = ['/login'];
 
