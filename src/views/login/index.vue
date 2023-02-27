@@ -2,8 +2,9 @@
   <div class="">{{ str }}</div>
 </template>
 <script lang="ts" setup>
-const str = ref('');
+import { ref, onMounted } from 'vue';
 
+const str = ref('登录');
 onMounted(() => {
   console.log();
 });

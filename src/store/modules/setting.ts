@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import SETTING_CONFIG from '@/config/setting';
 
-const useSettingStore = defineStore('setting', {
+export const useSettingStore = defineStore('setting', {
   state: () => {
     return {
       ...SETTING_CONFIG,
@@ -35,5 +35,3 @@ const useSettingStore = defineStore('setting', {
     ]
   }
 });
-
-export default useSettingStore;

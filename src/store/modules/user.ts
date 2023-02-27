@@ -5,7 +5,7 @@ const InitUserInfo = {
   roles: []
 };
 
-const useUserStore = defineStore('user', {
+export const useUserStore = defineStore('user', {
   state: () => {
     return {
       token: '',
@@ -31,8 +31,6 @@ const useUserStore = defineStore('user', {
     ]
   }
 });
-
-export default useUserStore;
 
 export function getUserStore() {
   return useUserStore(store);
