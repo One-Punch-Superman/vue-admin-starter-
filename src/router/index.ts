@@ -1,4 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+import { getUserStore } from '@/store';
 
 const modules = import.meta.globEager('./modules/**/*.ts');
 const routeModuleList: Array<RouteRecordRaw> = [];
@@ -32,6 +35,8 @@ const defaultRouterList: Array<RouteRecordRaw> = [
 
 export const allRoutes = [...defaultRouterList, ...asyncRouterList];
 
+const whiteRouters = ['/login'];
+
 const router = createRouter({
   history: createWebHistory(),
   routes: allRoutes,
@@ -41,6 +46,42 @@ const router = createRouter({
       top: 0,
       behavior: 'smooth'
     };
+  }
+});
+
+router.beforeEach(async (to, from, next) => {
+  NProgress.start();
+  const userStore = getUserStore();
+  const { token } = userStore;
+  if (token) {
+    if (to.path === '/login') {
+      next();
+      return;
+    }
+    try {
+      await userStore.getUserInfo();
+      if (router.hasRoute(to.name)) {
+        next();
+      } else {
+        next(`/`);
+      }
+    } catch (error) {
+      next({
+        path: '/login',
+        query: { redirect: encodeURIComponent(to.fullPath) }
+      });
+      NProgress.done();
+    }
+  } else {
+    if (whiteRouters.includes(to.path)) {
+      next();
+    } else {
+      next({
+        path: '/login',
+        query: { redirect: encodeURIComponent(to.fullPath) }
+      });
+    }
+    NProgress.done();
   }
 });
 
