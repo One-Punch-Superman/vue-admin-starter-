@@ -9,18 +9,17 @@
     <div class="menu"></div>
     <div class="info">
       <el-avatar> user </el-avatar>
-      <el-dropdown>
+      <el-dropdown trigger="click" size="large" @command="linkTo">
         <span class="el-dropdown-link">
-          Tencent
+          {{ userInfo.name }}
           <el-icon class="el-icon--right">
             <arrow-down />
           </el-icon>
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>Action 1</el-dropdown-item>
-            <el-dropdown-item>Action 2</el-dropdown-item>
-            <el-dropdown-item>Action 3</el-dropdown-item>
+            <el-dropdown-item command="user">个人中心</el-dropdown-item>
+            <el-dropdown-item command="login">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -33,20 +32,32 @@
 
 <script lang="ts" setup>
 import { Setting, ArrowDown } from '@element-plus/icons-vue';
-import { useSettingStore } from '@/store/index';
+import { useSettingStore, useUserStore } from '@/store';
 import Aside from '@/layout/aside/index.vue';
 
+const router = useRouter();
 const settingStore = useSettingStore();
+const userStore = useUserStore();
 const { layout } = storeToRefs(settingStore);
+const { userInfo } = storeToRefs(userStore);
 const changeLayout = () => {
   settingStore.updateConfig({
     isShowSetting: true
   });
 };
+
 onMounted(() => {
-  console.log();
+  userStore.getUserInfo();
 });
+
+const linkTo = (command: string) => {
+  if (command == 'login') {
+    userStore.logout();
+  }
+  router.push(`/${command}`);
+};
 </script>
+
 <style lang="scss" scoped>
 .layout-header {
   display: flex;
@@ -60,7 +71,7 @@ onMounted(() => {
     align-items: center;
     .el-dropdown {
       margin-right: 15px;
-      margin-left: 5px;
+      margin-left: 10px;
     }
     .el-icon {
       cursor: pointer;

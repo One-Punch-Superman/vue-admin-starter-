@@ -53,24 +53,9 @@ router.beforeEach(async (to, from, next) => {
   const { token } = userStore;
   if (token) {
     if (to.path === '/login') {
+      next('/');
+    } else {
       next();
-      NProgress.done();
-      return;
-    }
-    try {
-      await userStore.getUserInfo();
-      if (router.hasRoute(to.name)) {
-        next();
-      } else {
-        next(`/`);
-      }
-      NProgress.done();
-    } catch (error) {
-      next({
-        path: '/login',
-        query: { redirect: encodeURIComponent(to.fullPath) }
-      });
-      NProgress.done();
     }
   } else {
     if (whiteRouters.includes(to.path)) {
@@ -81,8 +66,11 @@ router.beforeEach(async (to, from, next) => {
         query: { redirect: encodeURIComponent(to.fullPath) }
       });
     }
-    NProgress.done();
   }
+});
+
+router.afterEach(() => {
+  NProgress.done();
 });
 
 export default router;

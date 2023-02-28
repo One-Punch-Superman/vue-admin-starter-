@@ -47,15 +47,5 @@ export default [
         title: '分步表单页'
       }
     ]
-  },
-  {
-    icon: 'tickets',
-    title: '个人中心',
-    path: '/user'
-  },
-  {
-    icon: 'tickets',
-    title: '登录中心',
-    path: '/login'
   }
 ];
