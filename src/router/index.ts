@@ -4,36 +4,29 @@ import 'nprogress/nprogress.css';
 import { getUserStore } from '@/store';
 
 const modules = import.meta.globEager('./modules/**/*.ts');
-const routeModuleList: Array<RouteRecordRaw> = [];
-
+const moduleRoute: Array<RouteRecordRaw> = [];
 Object.keys(modules).forEach((key) => {
   const mod = modules[key].default || {};
   const modList = Array.isArray(mod) ? [...mod] : [mod];
-  routeModuleList.push(...modList);
+  moduleRoute.push(...modList);
 });
 
-export const moduleRouter: Array<RouteRecordRaw> = [...routeModuleList];
+NProgress.configure({ showSpinner: false });
 
-const defaultRouter: Array<RouteRecordRaw> = [
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/login/index.vue')
-  },
+export const allRoutes: Array<RouteRecordRaw> = [
   {
     path: '/',
+    name: 'home',
     redirect: '/dashboard/base'
   },
+  ...moduleRoute,
   {
     path: '/:w+',
-    name: '404Page',
-    redirect: '/result/404'
+    redirect: '/404'
   }
 ];
 
-export const allRoutes = [...defaultRouter, ...moduleRouter];
-
-const whiteRouters = ['/login'];
+const whiteList = ['/login'];
 
 const router = createRouter({
   history: createWebHistory(),
@@ -58,13 +51,10 @@ router.beforeEach(async (to, from, next) => {
       next();
     }
   } else {
-    if (whiteRouters.includes(to.path)) {
+    if (whiteList.includes(to.path)) {
       next();
     } else {
-      next({
-        path: '/login',
-        query: { redirect: encodeURIComponent(to.fullPath) }
-      });
+      next(`/login?redirect=${to.path}`);
     }
   }
 });

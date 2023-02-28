@@ -3,7 +3,6 @@ import Layout from '@/layout/index.vue';
 export default [
   {
     path: '/list',
-    name: 'list',
     component: Layout,
     redirect: '/list/base',
     meta: { title: '列表页' },
