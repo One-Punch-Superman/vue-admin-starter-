@@ -7,6 +7,7 @@ export default {
   showFooter: true, // 是否展示Footer
   isUseTabsRouter: false, // 是否使用多标签页功能
   isSidebarCompact: false, // 是否收缩sideBar
+  sidebarWidth: '250px', // sideBar宽度
   headerBackground: '#fff', // #ce4545
   asideBackground: '#fff' // #caa7a7
 };

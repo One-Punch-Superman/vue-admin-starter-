@@ -10,18 +10,16 @@ export const useSettingStore = defineStore('setting', {
   },
   getters: {},
   actions: {
-    changeSetting() {
-      if (this.layout === 'side') {
-        this.layout = 'top';
-      } else {
-        this.layout = 'side';
-      }
-    },
     updateConfig(payload: any) {
       for (const key in payload) {
         if (payload[key] !== undefined) {
           this[key] = payload[key];
         }
+      }
+    },
+    resetConfig() {
+      for (const key in SETTING_CONFIG) {
+        this[key] = SETTING_CONFIG[key];
       }
     }
   },

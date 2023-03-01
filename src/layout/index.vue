@@ -1,7 +1,7 @@
 <template>
   <div class="layout-container">
     <el-container v-if="layout === 'side'">
-      <el-aside width="250px" :style="{ background: asideBackground }">
+      <el-aside width="250px" :style="{ width: sidebarWidth, background: asideBackground }">
         <Aside />
       </el-aside>
       <el-container>
@@ -10,7 +10,7 @@
         </el-header>
         <el-main>
           <Main />
-          <el-footer><Footer /></el-footer>
+          <el-footer v-if="showFooter"><Footer /></el-footer>
         </el-main>
       </el-container>
     </el-container>
@@ -20,12 +20,12 @@
         <Header />
       </el-header>
       <el-container>
-        <el-aside v-if="layout === 'mix'" width="250px" :style="{ background: asideBackground }">
+        <el-aside v-if="layout === 'mix'" :style="{ width: sidebarWidth, background: asideBackground }">
           <Aside />
         </el-aside>
         <el-main>
           <Main />
-          <el-footer><Footer /></el-footer>
+          <el-footer v-if="showFooter"><Footer /></el-footer>
         </el-main>
       </el-container>
     </el-container>
@@ -43,7 +43,7 @@ import SettingDrawer from '@/layout/setting.vue';
 import { useSettingStore } from '@/store';
 
 const settingStore = useSettingStore();
-const { layout, headerBackground, asideBackground } = storeToRefs(settingStore);
+const { layout, headerBackground, asideBackground, sidebarWidth, showFooter } = storeToRefs(settingStore);
 </script>
 
 <style lang="scss" scoped>
@@ -55,6 +55,7 @@ const { layout, headerBackground, asideBackground } = storeToRefs(settingStore);
   .el-aside {
     overflow: hidden;
     border-right: 1px solid #e8e8e8;
+    transition: width 0.3s;
   }
   .el-main {
     height: calc(100vh - 60px);

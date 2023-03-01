@@ -3,7 +3,10 @@
     <div v-if="layout !== 'side'" class="header-log">
       <img width="180" src="@/assets/image/assets-logo-full.svg" alt="logo" />
     </div>
-    <el-icon @click="changeCollapsed"><Expand /></el-icon>
+    <div v-if="layout === 'side'">
+      <el-icon v-if="isSidebarCompact" @click="changeCollapsed"><Expand /></el-icon>
+      <el-icon v-else @click="changeCollapsed"><Fold /></el-icon>
+    </div>
     <div class="but" v-if="layout === 'top'">
       <Aside />
     </div>
@@ -52,7 +55,8 @@ const changeLayout = () => {
 };
 const changeCollapsed = () => {
   settingStore.updateConfig({
-    isSidebarCompact: !isSidebarCompact.value
+    isSidebarCompact: !isSidebarCompact.value,
+    sidebarWidth: !isSidebarCompact.value ? '65px' : '250px'
   });
 };
 

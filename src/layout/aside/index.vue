@@ -1,6 +1,7 @@
 <template>
   <div v-if="layout === 'side'" class="header-log">
-    <img width="180" src="@/assets/image/assets-logo-full.svg" alt="logo" />
+    <img v-if="!isSidebarCompact" width="180" src="@/assets/image/assets-logo-full.svg" alt="logo" />
+    <img v-else width="28" src="@/assets/image/assets-t-logo.svg" alt="logo" />
   </div>
   <el-scrollbar>
     <el-menu
@@ -11,6 +12,10 @@
     >
       <SubMenu :menu-list="menuList" />
     </el-menu>
+    <div class="mix-collapse" v-if="layout === 'mix'">
+      <el-icon v-if="isSidebarCompact" @click="changeCollapsed"><Expand /></el-icon>
+      <el-icon v-else @click="changeCollapsed"><Fold /></el-icon>
+    </div>
   </el-scrollbar>
 </template>
 
@@ -31,6 +36,13 @@ const active = computed(() => {
 onMounted(() => {
   console.log();
 });
+
+const changeCollapsed = () => {
+  settingStore.updateConfig({
+    isSidebarCompact: !isSidebarCompact.value,
+    sidebarWidth: !isSidebarCompact.value ? '65px' : '250px'
+  });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -42,11 +54,17 @@ onMounted(() => {
   margin-left: 20px;
 }
 .el-menu {
+  position: relative;
   height: calc(100vh - 60px);
   border-right: 0;
 }
 .el-menu--horizontal {
   height: 60px;
   border-bottom: 0;
+}
+.mix-collapse {
+  position: absolute;
+  right: 20px;
+  bottom: 15px;
 }
 </style>

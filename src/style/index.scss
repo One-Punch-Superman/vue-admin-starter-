@@ -5,3 +5,13 @@ body {
 .el-icon {
   cursor: pointer;
 }
+.el-drawer {
+  .el-drawer__header {
+    height: 40px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #000000e6;
+    border-bottom: 1px solid #e8e8e8;
+  }
+}
