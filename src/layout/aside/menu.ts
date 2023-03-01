@@ -1,6 +1,6 @@
 export default [
   {
-    icon: 'message-box',
+    icon: 'Printer',
     title: '仪表盘',
     path: '/dashboard',
     children: [
@@ -15,7 +15,7 @@ export default [
     ]
   },
   {
-    icon: 'data-analysis',
+    icon: 'Memo',
     title: '列表页',
     path: '/list',
     children: [
@@ -34,7 +34,7 @@ export default [
     ]
   },
   {
-    icon: 'data-analysis',
+    icon: 'Tickets',
     title: '表单页',
     path: '/form',
     children: [

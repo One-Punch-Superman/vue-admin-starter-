@@ -3,7 +3,7 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { getUserStore } from '@/store';
 
-const modules = import.meta.globEager('./modules/**/*.ts');
+const modules: any = import.meta.globEager('./modules/**/*.ts');
 const moduleRoute: Array<RouteRecordRaw> = [];
 Object.keys(modules).forEach((key) => {
   const mod = modules[key].default || {};

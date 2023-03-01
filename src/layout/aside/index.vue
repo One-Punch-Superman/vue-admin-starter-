@@ -1,9 +1,14 @@
 <template>
   <div v-if="layout === 'side'" class="header-log">
-    <img width="180" src="https://www.tencent.com/img/index/menu_logo_hover.png" alt="logo" />
+    <img width="180" src="@/assets/image/assets-logo-full.svg" alt="logo" />
   </div>
   <el-scrollbar>
-    <el-menu background-color="#fff" :default-active="active" :mode="layout === 'top' ? 'horizontal' : 'vertical'">
+    <el-menu
+      :background-color="layout === 'top' ? headerBackground : asideBackground"
+      :default-active="active"
+      :mode="layout === 'top' ? 'horizontal' : 'vertical'"
+      :collapse="layout === 'top' ? false : isSidebarCompact"
+    >
       <SubMenu :menu-list="menuList" />
     </el-menu>
   </el-scrollbar>
@@ -13,11 +18,11 @@
 import { storeToRefs } from 'pinia';
 import { useSettingStore } from '@/store';
 import SubMenu from './SubMenu.vue';
-
 import menuList from './menu';
-const settingStore = useSettingStore();
-const { layout } = storeToRefs(settingStore);
+
 const route = useRoute();
+const settingStore = useSettingStore();
+const { layout, headerBackground, asideBackground, isSidebarCompact } = storeToRefs(settingStore);
 
 const active = computed(() => {
   return route.path;
@@ -33,7 +38,15 @@ onMounted(() => {
   display: flex;
   align-items: center;
   width: 230px;
-  height: 60px;
+  height: 59px;
   margin-left: 20px;
+}
+.el-menu {
+  height: calc(100vh - 60px);
+  border-right: 0;
+}
+.el-menu--horizontal {
+  height: 60px;
+  border-bottom: 0;
 }
 </style>

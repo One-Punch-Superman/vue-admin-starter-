@@ -1,8 +1,9 @@
 <template>
   <div class="layout-header">
     <div v-if="layout !== 'side'" class="header-log">
-      <img width="180" src="https://www.tencent.com/img/index/menu_logo_hover.png" alt="logo" />
+      <img width="180" src="@/assets/image/assets-logo-full.svg" alt="logo" />
     </div>
+    <el-icon @click="changeCollapsed"><Expand /></el-icon>
     <div class="but" v-if="layout === 'top'">
       <Aside />
     </div>
@@ -38,17 +39,22 @@ import Aside from '@/layout/aside/index.vue';
 const router = useRouter();
 const settingStore = useSettingStore();
 const userStore = useUserStore();
-const { layout } = storeToRefs(settingStore);
+const { layout, isSidebarCompact } = storeToRefs(settingStore);
 const { userInfo } = storeToRefs(userStore);
+
+onMounted(() => {
+  userStore.getUserInfo();
+});
 const changeLayout = () => {
   settingStore.updateConfig({
     isShowSetting: true
   });
 };
-
-onMounted(() => {
-  userStore.getUserInfo();
-});
+const changeCollapsed = () => {
+  settingStore.updateConfig({
+    isSidebarCompact: !isSidebarCompact.value
+  });
+};
 
 const linkTo = (command: string) => {
   if (command == 'login') {

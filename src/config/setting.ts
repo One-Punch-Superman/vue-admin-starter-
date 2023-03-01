@@ -6,5 +6,7 @@ export default {
   showBreadcrumb: false, // 是否展示面包屑
   showFooter: true, // 是否展示Footer
   isUseTabsRouter: false, // 是否使用多标签页功能
-  isSidebarCompact: false // 是否收缩sideBar
+  isSidebarCompact: false, // 是否收缩sideBar
+  headerBackground: '#fff', // #ce4545
+  asideBackground: '#fff' // #caa7a7
 };

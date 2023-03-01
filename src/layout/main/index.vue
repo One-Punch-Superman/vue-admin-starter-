@@ -15,4 +15,8 @@ onMounted(() => {
   console.log();
 });
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.layout-main {
+  min-height: calc(100vh - 140px);
+}
+</style>
