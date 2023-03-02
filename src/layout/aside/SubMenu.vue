@@ -39,17 +39,12 @@ const handleClickMenu = (subItem: Menu.MenuOptions) => {
     &.is-active {
       color: #fff;
       background-color: #1e7cda;
-
-      // &::before {
-      //   position: absolute;
-      //   top: 0;
-      //   bottom: 0;
-      //   left: 0;
-      //   width: 4px;
-      //   background: var(--el-color-primary);
-      //   content: '';
-      // }
     }
+  }
+}
+.el-menu--vertical > .el-sub-menu.is-active:not(.is-opened) {
+  .el-icon {
+    color: #1e7cda;
   }
 }
 .el-menu--horizontal > .el-menu-item.is-active {
