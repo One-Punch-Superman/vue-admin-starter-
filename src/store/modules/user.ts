@@ -39,15 +39,7 @@ export const useUserStore = defineStore('user', {
       this.userInfo = { ...InitUserInfo };
     }
   },
-  persist: {
-    enabled: true,
-    strategies: [
-      {
-        key: 'user',
-        storage: localStorage
-      }
-    ]
-  }
+  persist: true
 });
 
 export function getUserStore() {

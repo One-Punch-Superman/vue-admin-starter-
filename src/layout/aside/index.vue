@@ -59,7 +59,7 @@ const changeCollapsed = () => {
   border-right: 0;
 }
 .el-menu--horizontal {
-  height: 60px;
+  height: 59px;
   border-bottom: 0;
 }
 .mix-collapse {

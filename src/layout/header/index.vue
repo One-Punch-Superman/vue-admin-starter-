@@ -11,6 +11,8 @@
       <Aside />
     </div>
     <div class="menu"></div>
+    <el-icon><Search /></el-icon>
+    <el-icon><Bell /></el-icon>
     <div class="info">
       <el-avatar> user </el-avatar>
       <el-dropdown trigger="click" size="large" @command="linkTo">
@@ -27,10 +29,10 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <el-icon @click="changeLayout">
-        <Setting />
-      </el-icon>
     </div>
+    <el-icon @click="changeLayout">
+      <Setting />
+    </el-icon>
   </div>
 </template>
 
@@ -83,9 +85,10 @@ const linkTo = (command: string) => {
       margin-right: 15px;
       margin-left: 10px;
     }
-    .el-icon {
-      cursor: pointer;
-    }
+  }
+  > .el-icon {
+    display: inline-block;
+    margin-right: 15px;
   }
 }
 .header-log {

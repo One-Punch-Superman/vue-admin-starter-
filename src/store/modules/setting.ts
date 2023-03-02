@@ -5,6 +5,8 @@ export const useSettingStore = defineStore('setting', {
   state: () => {
     return {
       ...SETTING_CONFIG,
+      isSidebarCompact: false, // 是否收缩sideBar
+      sidebarWidth: '250px', // sideBar宽度
       isShowSetting: false
     };
   },
@@ -24,12 +26,6 @@ export const useSettingStore = defineStore('setting', {
     }
   },
   persist: {
-    enabled: true,
-    strategies: [
-      {
-        key: 'setting',
-        storage: localStorage
-      }
-    ]
+    paths: Object.keys(SETTING_CONFIG)
   }
 });

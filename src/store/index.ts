@@ -1,8 +1,8 @@
 import { createPinia } from 'pinia';
-import piniaPluginPersist from 'pinia-plugin-persist';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 const store = createPinia();
-store.use(piniaPluginPersist);
+store.use(piniaPluginPersistedstate);
 
 export * from './modules/user';
 export * from './modules/setting';
