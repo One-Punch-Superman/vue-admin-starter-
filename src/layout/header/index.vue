@@ -14,7 +14,9 @@
     <el-icon><Search /></el-icon>
     <el-icon><Bell /></el-icon>
     <div class="info">
-      <el-avatar> user </el-avatar>
+      <el-avatar>
+        <img src="@/assets/logo.png" alt="" />
+      </el-avatar>
       <el-dropdown trigger="click" size="large" @command="linkTo">
         <span class="el-dropdown-link">
           {{ userInfo.name }}

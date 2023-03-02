@@ -1,12 +1,9 @@
 <template>
   <div class="layout-footer">Copyright © 2022-{{ new Date().getFullYear() }}. All Rights Reserved</div>
 </template>
-<script lang="ts" setup>
-const str = ref('');
-onMounted(() => {
-  console.log();
-});
-</script>
+
+<script lang="ts" setup></script>
+
 <style lang="scss" scoped>
 .layout-footer {
   height: 20px;

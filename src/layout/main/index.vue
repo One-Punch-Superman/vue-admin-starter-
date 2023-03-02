@@ -7,14 +7,9 @@
     </router-view>
   </div>
 </template>
-<script lang="ts" setup>
-import { ref, onMounted } from 'vue';
 
-const str = ref('');
-onMounted(() => {
-  console.log();
-});
-</script>
+<script lang="ts" setup></script>
+
 <style lang="scss" scoped>
 .layout-main {
   min-height: calc(100vh - 140px);
