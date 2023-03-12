@@ -32,7 +32,7 @@
         </template>
       </el-dropdown>
     </div>
-    <el-icon @click="changeLayout">
+    <el-icon class="icon-setting" @click="changeLayout">
       <Setting />
     </el-icon>
   </div>
@@ -90,7 +90,10 @@ const linkTo = (command: string) => {
   }
   > .el-icon {
     display: inline-block;
-    margin-right: 15px;
+    margin-right: 18px;
+  }
+  .icon-setting {
+    margin-right: 5px;
   }
 }
 .header-log {
