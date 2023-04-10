@@ -1,82 +1,53 @@
-import axios, { AxiosRequestConfig } from 'axios';
-import NProgress from 'nprogress';
+import axios from 'axios';
 
-// 设置请求头和请求路径
-axios.defaults.baseURL = '/api';
-axios.defaults.timeout = 10000;
-axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
+// 创建实例
+const instance = axios.create({
+  baseURL: '/api',
+  timeout: 5000
+});
 
 // 请求拦截
-axios.interceptors.request.use(
-  (config): AxiosRequestConfig<any> => {
-    const token = window.sessionStorage.getItem('token');
+instance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
     if (token) {
-      //@ts-ignore
-      config.headers.token = token;
+      config.headers.common['Authorization'] = `Bearer ${token}`;
     }
     return config;
   },
   (error) => {
-    return error;
+    return Promise.reject(error);
   }
 );
 
 // 响应拦截
-axios.interceptors.response.use((res) => {
-  if (res.data.code === 111) {
-    sessionStorage.setItem('token', '');
-    // token过期操作
+instance.interceptors.response.use(
+  (response) => {
+    return response.data;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
-  return res;
-});
+);
 
 export function get(url: string, params?: any) {
-  return new Promise((resolve, reject) => {
-    NProgress.start();
-    axios
-      .get(url, { params })
-      .then((res) => {
-        NProgress.done();
-        resolve(res.data);
-      })
-      .catch((err) => {
-        NProgress.done();
-        reject(err.data);
-      });
-  });
+  return instance.get(url, { params });
 }
 
-export function post(url: string, params?: any) {
-  return new Promise((resolve, reject) => {
-    NProgress.start();
-    axios
-      .post(url, JSON.stringify(params))
-      .then((res) => {
-        NProgress.done();
-        resolve(res.data);
-      })
-      .catch((err) => {
-        NProgress.done();
-        reject(err.data);
-      });
-  });
+export function post(url: string, data: any) {
+  return instance.post(url, data);
+}
+
+export function put(url: string, data: any) {
+  return instance.put(url, data);
+}
+export function del(url: string, data: any) {
+  return instance.delete(url, data);
 }
 
 export function upload(url: string, file: any) {
-  return new Promise((resolve, reject) => {
-    NProgress.start();
-    axios
-      .post(url, file, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      })
-      .then((res) => {
-        NProgress.done();
-        resolve(res.data);
-      })
-      .catch((err) => {
-        NProgress.done();
-        reject(err.data);
-      });
+  return instance.post(url, file, {
+    headers: { 'Content-Type': 'multipart/form-data' }
   });
 }
 
