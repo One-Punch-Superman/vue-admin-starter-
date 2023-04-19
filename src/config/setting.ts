@@ -5,6 +5,6 @@ export default {
   showFooter: true, // 是否展示Footer
   showBreadcrumb: false, // 是否展示面包屑
   isUseTabsRouter: false, // 是否使用多标签页功能
-  headerBackground: '#fff', // #ce4545
+  headerBackground: '#b71533', // #ce4545
   asideBackground: '#fff' // #caa7a7
 };
