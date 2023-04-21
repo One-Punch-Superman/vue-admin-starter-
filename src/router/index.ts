@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { getUserStore } from '@/store';
+import Layout from '@/layout/index.vue';
 
 const modules: any = import.meta.globEager('./modules/**/*.ts');
 const moduleRoute: Array<RouteRecordRaw> = [];
@@ -17,7 +18,13 @@ export const allRoutes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    redirect: '/dashboard/base'
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/home/index.vue')
+      }
+    ]
   },
   ...moduleRoute,
   {
@@ -27,7 +34,7 @@ export const allRoutes: Array<RouteRecordRaw> = [
 ];
 
 const whiteList = ['/login'];
-
+console.log('allRoutes', allRoutes);
 const router = createRouter({
   history: createWebHistory(),
   routes: allRoutes,

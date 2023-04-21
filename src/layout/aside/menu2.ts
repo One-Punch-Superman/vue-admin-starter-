@@ -1,8 +1,12 @@
 export default [
   {
-    icon: 'Printer',
-    title: '首页',
-    path: '/'
+    path: '/',
+    name: 'list',
+    component: 'LAYOUT',
+    meta: {
+      title: '首页',
+      icon: 'Printer'
+    }
   },
   {
     icon: 'Tickets',
