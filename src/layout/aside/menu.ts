@@ -77,6 +77,6 @@ export default [
   {
     icon: 'Tickets',
     title: '关于项目',
-    path: '/abuout'
+    path: '/about'
   }
 ];

@@ -2,24 +2,36 @@ export default [
   {
     path: '/',
     name: 'list',
-    component: 'LAYOUT',
+    component: '/',
     meta: {
-      title: '首页',
-      icon: 'Printer'
+      icon: 'Printer',
+      title: '首页'
     }
   },
   {
-    icon: 'Tickets',
-    title: '权限管理',
     path: '/permission',
+    name: 'permission',
+    redirect: '/permission/menu',
+    meta: {
+      icon: 'Tickets',
+      title: '权限管理'
+    },
     children: [
       {
         path: '/permission/menu',
-        title: '菜单权限'
+        component: '/permission/menu/index',
+        meta: {
+          icon: 'Printer',
+          title: '菜单权限'
+        }
       },
       {
         path: '/permission/button',
-        title: '按钮权限'
+        component: '/permission/button/index',
+        meta: {
+          icon: 'Printer',
+          title: '按钮权限'
+        }
       }
     ]
   },
@@ -81,6 +93,6 @@ export default [
   {
     icon: 'Tickets',
     title: '关于项目',
-    path: '/abuout'
+    path: '/about'
   }
 ];

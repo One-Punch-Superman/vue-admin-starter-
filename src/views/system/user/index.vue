@@ -2,8 +2,8 @@
   <div class="add">
     <el-button type="primary" @click="handleAdd">新增</el-button>
   </div>
-  <el-table :data="tableData" style="width: 100%">
-    <el-table-column align="center" prop="userName" label="用户名" />
+  <el-table :data="tableData" style="width: 100%" border>
+    <el-table-column align="center" prop="userName" label="用户名称" />
     <el-table-column align="center" prop="department" label="部门" />
     <el-table-column align="center" prop="role" label="角色" />
     <el-table-column align="center" label="操作" width="150">
