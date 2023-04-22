@@ -87,6 +87,24 @@ const tableData = [
         }
       }
     ]
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: '/user/index',
+    meta: {
+      icon: 'Printer',
+      title: '个人中心'
+    }
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: '/about/index',
+    meta: {
+      icon: 'Printer',
+      title: '关于项目'
+    }
   }
 ];
 
