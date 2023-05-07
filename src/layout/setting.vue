@@ -32,6 +32,7 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
 import { useSettingStore } from '@/store/index';
+import { dynamicColor } from '@/utils/color';
 
 const settingStore = useSettingStore();
 const { isShowSetting, layout, headerBackground, asideBackground, showFooter } = storeToRefs(settingStore);
@@ -43,6 +44,11 @@ const getImageUrl = (name: string) => {
 const resetSetting = () => {
   settingStore.resetConfig();
 };
+
+watch(headerBackground, () => {
+  const color = dynamicColor(headerBackground.value);
+  console.log('color', color);
+});
 </script>
 
 <style lang="scss" scoped>

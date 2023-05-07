@@ -1,16 +1,18 @@
 <template>
-  <div class="formLogin">
-    <el-form ref="formRef" :model="formData">
-      <el-form-item label="" prop="account">
-        <el-input v-model="formData.account" placeholder="请输入账号：admin" />
-      </el-form-item>
-      <el-form-item label="" prop="password">
-        <el-input v-model="formData.password" type="password" placeholder="请输入登录密码：admin" />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm">登录</el-button>
-      </el-form-item>
-    </el-form>
+  <div class="formContent">
+    <div class="formLogin">
+      <el-form ref="formRef" :model="formData">
+        <el-form-item label="" prop="account">
+          <el-input v-model="formData.account" placeholder="请输入账号：admin" />
+        </el-form-item>
+        <el-form-item label="" prop="password">
+          <el-input v-model="formData.password" type="password" placeholder="请输入登录密码：admin" />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm">登录</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -29,11 +31,22 @@ const submitForm = async () => {
 };
 </script>
 <style lang="scss" scoped>
+.formContent {
+  height: 100vh;
+  background-attachment: fixed;
+  background-image: url('@/assets/bg2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .formLogin {
   position: absolute;
   top: 40%;
   left: 50%;
-  width: 300px;
+  width: 320px;
+  padding: 45px 45px 20px;
+  background-color: #5d646b;
+  border-radius: 5px;
+  opacity: 0.9;
   transform: translate(-50%, -50%);
   .el-button {
     width: 100%;

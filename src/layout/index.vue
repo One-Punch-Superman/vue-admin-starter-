@@ -48,7 +48,7 @@ const { layout, headerBackground, asideBackground, sidebarWidth, showFooter } = 
 
 <style lang="scss" scoped>
 .layout-container {
-  background: #eee;
+  background: #f0f2f5;
   .el-header {
     border-bottom: 1px solid #e8e8e8;
   }

@@ -34,7 +34,7 @@ export function get(url: string, params?: any) {
   return instance.get(url, { params });
 }
 
-export function post(url: string, data: any) {
+export function post(url: string, data?: any) {
   return instance.post(url, data);
 }
 

@@ -4,8 +4,8 @@
       <img width="180" src="@/assets/image/assets-logo-full.svg" alt="logo" />
     </div>
     <div v-if="layout === 'side'">
-      <el-icon v-if="isSidebarCompact" @click="changeCollapsed"><Expand /></el-icon>
-      <el-icon v-else @click="changeCollapsed"><Fold /></el-icon>
+      <el-icon :size="20" v-if="isSidebarCompact" @click="changeCollapsed"><Expand /></el-icon>
+      <el-icon :size="20" v-else @click="changeCollapsed"><Fold /></el-icon>
     </div>
     <div class="but" v-if="layout === 'top'">
       <Aside />
@@ -18,7 +18,7 @@
         <img src="@/assets/logo.png" alt="" />
       </el-avatar>
       <el-dropdown trigger="click" size="large" @command="linkTo">
-        <span class="el-dropdown-link">
+        <span class="dropdown-name">
           {{ userInfo.name }}
           <el-icon class="el-icon--right">
             <arrow-down />
@@ -101,5 +101,19 @@ const linkTo = (command: string) => {
   align-items: center;
   width: 250px;
   height: 60px;
+}
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  .el-icon,
+  .dropdown-name {
+    color: #303133 !important;
+  }
+}
+@media (prefers-color-scheme: light) {
+  .el-icon,
+  .dropdown-name {
+    color: #fff !important;
+  }
 }
 </style>
