@@ -105,14 +105,14 @@ const linkTo = (command: string) => {
 </style>
 <style>
 @media (prefers-color-scheme: dark) {
-  .el-icon,
-  .dropdown-name {
+  .layout-header .el-icon,
+  .layout-header .dropdown-name {
     color: #303133 !important;
   }
 }
 @media (prefers-color-scheme: light) {
-  .el-icon,
-  .dropdown-name {
+  .layout-header .el-icon,
+  .layout-header .dropdown-name {
     color: #fff !important;
   }
 }
