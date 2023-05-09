@@ -47,7 +47,25 @@ const handleClickMenu = (subItem: Menu.MenuOptions) => {
     color: #1e7cda;
   }
 }
-.el-menu--horizontal > .el-menu-item.is-active {
+.el-menu--horizontal > .el-menu-item {
   color: #fff;
+}
+.el-menu--horizontal > .el-menu-item.is-active {
+  color: #fff !important;
+}
+.el-menu--horizontal > .el-sub-menu .el-sub-menu__title {
+  color: #fff;
+}
+.el-menu--horizontal {
+  .el-menu .el-menu-item,
+  .el-menu .el-sub-menu__title {
+    color: #fff;
+  }
+  .el-sub-menu.is-active {
+    color: #fff;
+  }
+}
+.el-menu--horizontal > .el-sub-menu .el-sub-menu__title {
+  color: #fff !important;
 }
 </style>

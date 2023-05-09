@@ -32,33 +32,6 @@ const dataList = [
     }
   },
   {
-    path: '/permission',
-    name: 'permission',
-    redirect: '/permission/menu',
-    meta: {
-      icon: 'Tickets',
-      title: '权限管理'
-    },
-    children: [
-      {
-        path: '/permission/menu',
-        component: '/permission/menu/index',
-        meta: {
-          icon: 'Printer',
-          title: '菜单权限'
-        }
-      },
-      {
-        path: '/permission/button',
-        component: '/permission/button/index',
-        meta: {
-          icon: 'Printer',
-          title: '按钮权限'
-        }
-      }
-    ]
-  },
-  {
     path: '/system',
     redirect: '/system/user',
     meta: {

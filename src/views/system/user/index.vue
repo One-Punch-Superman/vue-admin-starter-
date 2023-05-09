@@ -140,10 +140,7 @@ const handleDel = (row: any) => {
     cancelButtonText: '取消',
     type: 'warning'
   }).then(() => {
-    ElMessage({
-      type: 'success',
-      message: '删除成功'
-    });
+    ElMessage.success('删除成功');
   });
 };
 const handleSizeChange = (val: number) => {

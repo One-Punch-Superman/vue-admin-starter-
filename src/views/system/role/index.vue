@@ -22,9 +22,9 @@
 <script lang="ts" setup>
 const dataList = [
   {
-    roleName: '超级管理员',
+    roleName: '管理员',
     mark: 'admin',
-    describe: '超级管理员，拥有所以权限'
+    describe: '管理员，拥有所以权限'
   },
   {
     roleName: '普通角色',
