@@ -1,23 +1,27 @@
 <template>
-  <div class="add">
-    <el-button type="primary" @click="handleAdd">新增</el-button>
-  </div>
-  <el-table :data="tableData" style="width: 100%" border row-key="path" default-expand-all>
-    <el-table-column prop="meta.title" label="菜单名" />
-    <el-table-column align="center" prop="meta.icon" label="菜单图标" />
-    <el-table-column align="center" prop="path" label="菜单路径" />
-    <el-table-column align="center" prop="component" label="组件路径" />
-    <el-table-column align="center" label="操作" width="150">
-      <template #default="scope">
-        <el-button size="small" link type="primary" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-        <el-button size="small" link type="primary" @click="handleDel(scope.$index, scope.row)">删除</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+  <el-row class="add">
+    <el-col :span="24" align="right">
+      <el-button type="primary" @click="handleAdd">新增</el-button>
+    </el-col>
+  </el-row>
+  <el-card>
+    <el-table :data="dataList" style="width: 100%" border row-key="path" default-expand-all>
+      <el-table-column prop="meta.title" label="菜单名" />
+      <el-table-column align="center" prop="meta.icon" label="菜单图标" />
+      <el-table-column align="center" prop="path" label="菜单路径" />
+      <el-table-column align="center" prop="component" label="组件路径" />
+      <el-table-column align="center" label="操作" width="150">
+        <template #default="scope">
+          <el-button size="small" link type="primary" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-button size="small" link type="primary" @click="handleDel(scope.$index, scope.row)">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+  </el-card>
 </template>
 
 <script lang="ts" setup>
-const tableData = [
+const dataList = [
   {
     path: '/',
     name: 'list',
@@ -118,7 +122,6 @@ const handleDel = () => {};
 
 <style lang="scss" scoped>
 .add {
-  float: right;
   margin-bottom: 10px;
 }
 </style>

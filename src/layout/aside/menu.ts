@@ -6,21 +6,6 @@ export default [
   },
   {
     icon: 'Tickets',
-    title: '权限管理',
-    path: '/permission',
-    children: [
-      {
-        path: '/permission/menu',
-        title: '菜单权限'
-      },
-      {
-        path: '/permission/button',
-        title: '按钮权限'
-      }
-    ]
-  },
-  {
-    icon: 'Tickets',
     title: '系统管理',
     path: '/system',
     children: [

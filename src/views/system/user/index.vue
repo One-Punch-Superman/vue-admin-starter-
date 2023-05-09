@@ -13,7 +13,7 @@
   </el-card>
   <!-- 列表 -->
   <el-card>
-    <el-table :data="userList" style="width: 100%" border>
+    <el-table :data="dataList" style="width: 100%" border>
       <el-table-column align="center" prop="userName" label="用户名" />
       <el-table-column align="center" prop="department" label="部门" />
       <el-table-column align="center" prop="role" label="角色" />
@@ -30,13 +30,13 @@
     v-model:current-page="currentPage"
     v-model:page-size="pageSize"
     :page-sizes="[10, 20, 50, 100]"
-    :disabled="disabled"
     layout="total, sizes, prev, pager, next, jumper"
     :total="total"
+    background
     @size-change="handleSizeChange"
     @current-change="handleCurrentChange"
   />
-  <el-dialog v-model="dialogFormVisible" :title="dialogTitle" width="600px">
+  <el-dialog v-model="dialogFormVisible" :title="dialogTitle" width="500px">
     <el-form :model="userForm" label-width="70px">
       <el-form-item label="用户名:">
         <el-input v-model="userForm.userName" />
@@ -52,8 +52,8 @@
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取消</el-button>
         <el-button type="primary" @click="dialogFormVisible = false">确定</el-button>
+        <el-button @click="dialogFormVisible = false">取消</el-button>
       </span>
     </template>
   </el-dialog>
@@ -63,12 +63,11 @@
 import { ElMessageBox, ElMessage } from 'element-plus';
 
 const searchName = ref('');
-const userList = ref<any>([]);
+const dataList = ref<any>([]);
 const roleList = ref<any>([]);
 const currentPage = ref(1);
 const pageSize = ref(10);
-const total = ref(0);
-const disabled = ref(false);
+const total = ref(25);
 const dialogTitle = ref('');
 const dialogFormVisible = ref(false);
 const userForm = reactive({
@@ -78,10 +77,10 @@ const userForm = reactive({
 });
 
 onMounted(() => {
-  getUserList();
+  getList();
 });
-const getUserList = () => {
-  userList.value = [
+const getList = () => {
+  dataList.value = [
     {
       userName: '白月初',
       department: '研发部门',
