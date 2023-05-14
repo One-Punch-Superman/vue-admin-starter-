@@ -14,9 +14,11 @@
   <!-- 列表 -->
   <el-card>
     <el-table :data="dataList" style="width: 100%" border>
-      <el-table-column align="center" prop="userName" label="用户名" />
-      <el-table-column align="center" prop="department" label="部门" />
+      <el-table-column align="center" prop="username" label="用户名" />
+      <el-table-column align="center" prop="email" label="邮箱" />
+      <el-table-column align="center" prop="address" label="地址" />
       <el-table-column align="center" prop="role" label="角色" />
+      <el-table-column align="center" prop="status" label="状态" />
       <el-table-column align="center" label="操作" width="150">
         <template #default="scope">
           <el-button size="small" link type="primary" @click="handleEdit(scope.row)">编辑</el-button>
@@ -36,24 +38,31 @@
     @size-change="handleSizeChange"
     @current-change="handleCurrentChange"
   />
-  <el-dialog v-model="dialogFormVisible" :title="dialogTitle" width="500px">
-    <el-form :model="userForm" label-width="70px">
-      <el-form-item label="用户名:">
-        <el-input v-model="userForm.userName" />
+  <!-- 对话框 -->
+  <el-dialog v-model="dialogVisible" :title="dialogTitle" @close="handleCancel" width="500px">
+    <el-form :model="formData" ref="formRef" :rules="formRules" label-width="70px">
+      <el-form-item label="用户名:" prop="username">
+        <el-input v-model="formData.username" />
       </el-form-item>
-      <el-form-item label="部门:">
-        <el-input v-model="userForm.department" />
+      <el-form-item label="邮箱:" prop="email">
+        <el-input v-model="formData.email" />
       </el-form-item>
-      <el-form-item label="角色:">
-        <el-select v-model="userForm.role" multiple placeholder=" ">
+      <el-form-item label="地址:" prop="address">
+        <el-input v-model="formData.address" />
+      </el-form-item>
+      <el-form-item label="角色:" prop="role">
+        <el-select v-model="formData.role" multiple placeholder=" ">
           <el-option v-for="(item, index) in roleList" :key="index" :label="item.label" :value="item.value" />
         </el-select>
+      </el-form-item>
+      <el-form-item label="状态:" prop="status">
+        <el-switch v-model="formData.status" :active-value="1" :inactive-value="0" />
       </el-form-item>
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button type="primary" @click="dialogFormVisible = false">确定</el-button>
-        <el-button @click="dialogFormVisible = false">取消</el-button>
+        <el-button type="primary" @click="handlecConfirm">确定</el-button>
+        <el-button @click="handleCancel">取消</el-button>
       </span>
     </template>
   </el-dialog>
@@ -61,47 +70,57 @@
 
 <script lang="ts" setup>
 import { ElMessageBox, ElMessage } from 'element-plus';
+import { getUserList } from '@/api/system';
 
 const searchName = ref('');
 const dataList = ref<any>([]);
 const roleList = ref<any>([]);
+
 const currentPage = ref(1);
 const pageSize = ref(10);
-const total = ref(25);
+const total = ref(0);
+
 const dialogTitle = ref('');
-const dialogFormVisible = ref(false);
-const userForm = reactive({
-  userName: '',
-  department: '',
-  role: []
+const dialogVisible = ref(false);
+
+const formRef = ref();
+const formData = reactive({
+  username: '',
+  email: '',
+  address: '',
+  role: [],
+  status: 1
+});
+const checkEmail = (rule: any, value: any, callback: any) => {
+  var reg = /^[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*\.[a-z]{2,}$/;
+  if (value && !reg.test(value)) {
+    return callback(new Error('邮箱格式错误'));
+  }
+  callback();
+};
+const formRules = reactive({
+  username: [
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { min: 3, max: 20, message: '长度在 3 到 20 个字符', trigger: 'blur' }
+  ],
+  email: [{ validator: checkEmail, trigger: 'blur' }]
 });
 
 onMounted(() => {
   getList();
 });
 const getList = () => {
-  dataList.value = [
-    {
-      userName: '白月初',
-      department: '研发部门',
-      role: ['admin']
-    },
-    {
-      userName: '孙悟空',
-      department: '市场部门',
-      role: ['admin']
-    },
-    {
-      userName: '猪八戒',
-      department: '财务部门',
-      role: ['common']
-    },
-    {
-      userName: '沙和尚',
-      department: '运维部门',
-      role: ['common']
+  const params = {
+    pageNo: currentPage.value,
+    pageSize: pageSize.value
+  };
+  getUserList(params).then((res: any) => {
+    if (res.code == 200) {
+      const data = res.data;
+      dataList.value = data.rows;
+      total.value = data.total;
     }
-  ];
+  });
 };
 const getRoleList = () => {
   roleList.value = [
@@ -119,23 +138,21 @@ const getRoleList = () => {
 const handleAdd = () => {
   getRoleList();
   dialogTitle.value = '新增';
-  userForm.userName = '';
-  userForm.department = '';
-  userForm.role = [];
-  dialogFormVisible.value = true;
+  formData.username = '';
+  formData.role = [];
+  dialogVisible.value = true;
 };
 // 编辑
 const handleEdit = (row: any) => {
   getRoleList();
   dialogTitle.value = '编辑';
-  userForm.userName = row.userName;
-  userForm.department = row.department;
-  userForm.role = row.role;
-  dialogFormVisible.value = true;
+  formData.username = row.username;
+  formData.role = row.role;
+  dialogVisible.value = true;
 };
 // 删除
 const handleDel = (row: any) => {
-  ElMessageBox.confirm(`你确定要删除${row.userName}吗?`, '提示', {
+  ElMessageBox.confirm(`你确定要删除${row.username}吗?`, '提示', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning'
@@ -143,11 +160,25 @@ const handleDel = (row: any) => {
     ElMessage.success('删除成功');
   });
 };
+// 取消
+const handleCancel = () => {
+  dialogVisible.value = false;
+  formRef.value.resetFields();
+};
+// 确定
+const handlecConfirm = () => {
+  formRef.value.validate((valid: any) => {
+    if (valid) {
+    }
+  });
+};
 const handleSizeChange = (val: number) => {
-  console.log(`${val} items per page`);
+  pageSize.value = val;
+  getList();
 };
 const handleCurrentChange = (val: number) => {
-  console.log(`current page: ${val}`);
+  currentPage.value = val;
+  getList();
 };
 </script>
 

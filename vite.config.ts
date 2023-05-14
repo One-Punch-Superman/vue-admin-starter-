@@ -5,7 +5,7 @@ import AutoImport from 'unplugin-auto-import/vite';
 import path from 'path';
 
 const PROXY = {
-  target: 'https://www.huawei.com/',
+  target: 'http://127.0.0.1:8088/',
   secure: false,
   ws: true,
   changeOrigin: true
@@ -31,7 +31,8 @@ export default defineConfig({
     port: 8080,
     open: true,
     proxy: {
-      '/rest': PROXY
+      '/rest': PROXY,
+      '/user': PROXY
     },
     headers: {
       'Access-Control-Allow-Origin': '*',
