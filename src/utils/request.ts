@@ -38,10 +38,10 @@ export function post(url: string, data?: any) {
   return instance.post(url, data);
 }
 
-export function put(url: string, data: any) {
+export function put(url: string, data?: any) {
   return instance.put(url, data);
 }
-export function del(url: string, data: any) {
+export function del(url: string, data?: any) {
   return instance.delete(url, data);
 }
 

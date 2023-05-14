@@ -4,7 +4,7 @@
     <el-row>
       <el-col :span="20">
         <el-input v-model="searchName" placeholder="用户名"></el-input>
-        <el-button type="primary">查询</el-button>
+        <el-button type="primary" @click="handleSearch">查询</el-button>
       </el-col>
       <el-col :span="4" align="right">
         <el-button type="primary" @click="handleAdd">新增</el-button>
@@ -18,7 +18,12 @@
       <el-table-column align="center" prop="email" label="邮箱" />
       <el-table-column align="center" prop="address" label="地址" />
       <el-table-column align="center" prop="role" label="角色" />
-      <el-table-column align="center" prop="status" label="状态" />
+      <el-table-column align="center" prop="status" label="状态">
+        <template #default="scope">
+          <el-tag v-if="scope.row.status">正常</el-tag>
+          <el-tag v-else type="danger">禁用</el-tag>
+        </template>
+      </el-table-column>
       <el-table-column align="center" label="操作" width="150">
         <template #default="scope">
           <el-button size="small" link type="primary" @click="handleEdit(scope.row)">编辑</el-button>
@@ -39,7 +44,7 @@
     @current-change="handleCurrentChange"
   />
   <!-- 对话框 -->
-  <el-dialog v-model="dialogVisible" :title="dialogTitle" @close="handleCancel" width="500px">
+  <el-dialog v-model="dialogVisible" :title="dialogTitle" width="500px">
     <el-form :model="formData" ref="formRef" :rules="formRules" label-width="70px">
       <el-form-item label="用户名:" prop="username">
         <el-input v-model="formData.username" />
@@ -70,7 +75,7 @@
 
 <script lang="ts" setup>
 import { ElMessageBox, ElMessage } from 'element-plus';
-import { getUserList } from '@/api/system';
+import { getUserList, postUser, putUser, delUser } from '@/api/system';
 
 const searchName = ref('');
 const dataList = ref<any>([]);
@@ -84,7 +89,8 @@ const dialogTitle = ref('');
 const dialogVisible = ref(false);
 
 const formRef = ref();
-const formData = reactive({
+const formData = ref({
+  id: '',
   username: '',
   email: '',
   address: '',
@@ -111,6 +117,7 @@ onMounted(() => {
 });
 const getList = () => {
   const params = {
+    username: searchName.value,
     pageNo: currentPage.value,
     pageSize: pageSize.value
   };
@@ -138,41 +145,81 @@ const getRoleList = () => {
 const handleAdd = () => {
   getRoleList();
   dialogTitle.value = '新增';
-  formData.username = '';
-  formData.role = [];
+  formData.value = {
+    id: '',
+    username: '',
+    email: '',
+    address: '',
+    role: [],
+    status: 1
+  };
   dialogVisible.value = true;
 };
 // 编辑
 const handleEdit = (row: any) => {
   getRoleList();
   dialogTitle.value = '编辑';
-  formData.username = row.username;
-  formData.role = row.role;
+  formData.value = row;
   dialogVisible.value = true;
 };
 // 删除
 const handleDel = (row: any) => {
-  ElMessageBox.confirm(`你确定要删除${row.username}吗?`, '提示', {
+  ElMessageBox.confirm(`你确定要删除用户 ${row.username} 吗?`, '提示', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning'
   }).then(() => {
-    ElMessage.success('删除成功');
+    delUser(row.id).then((res: any) => {
+      if (res.code == 200) {
+        dialogVisible.value = false;
+        getList();
+        ElMessage.success('删除成功');
+      } else {
+        ElMessage.error(res.message);
+      }
+    });
   });
-};
-// 取消
-const handleCancel = () => {
-  dialogVisible.value = false;
-  formRef.value.resetFields();
 };
 // 确定
 const handlecConfirm = () => {
   formRef.value.validate((valid: any) => {
     if (valid) {
+      const params = formData.value;
+      if (params.id) {
+        putUser(params).then((res: any) => {
+          if (res.code == 200) {
+            dialogVisible.value = false;
+            getList();
+            ElMessage.success('编辑成功');
+          } else {
+            ElMessage.error(res.message);
+          }
+        });
+      } else {
+        postUser(params).then((res: any) => {
+          if (res.code == 200) {
+            dialogVisible.value = false;
+            getList();
+            ElMessage.success('新增成功');
+          } else {
+            ElMessage.error(res.message);
+          }
+        });
+      }
     }
   });
 };
+// 取消
+const handleCancel = () => {
+  dialogVisible.value = false;
+};
+// 查询
+const handleSearch = () => {
+  currentPage.value = 1;
+  getList();
+};
 const handleSizeChange = (val: number) => {
+  currentPage.value = 1;
   pageSize.value = val;
   getList();
 };
