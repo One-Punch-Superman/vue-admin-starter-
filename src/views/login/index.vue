@@ -25,7 +25,7 @@ const formRef = ref();
 const formData = ref({ account: 'admin', password: 'admin' });
 
 const submitForm = async () => {
-  await userStore.login();
+  await userStore.userLogin();
   ElMessage.success('登录成功');
   router.push('/');
 };

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import store from '@/store';
+import { login } from '@/api/user';
 
 const InitUserInfo = {
   name: '',
@@ -15,7 +16,8 @@ export const useUserStore = defineStore('user', {
   },
   getters: {},
   actions: {
-    async login() {
+    async userLogin() {
+      const data = await login();
       const response = {
         code: 200,
         message: '登陆成功',

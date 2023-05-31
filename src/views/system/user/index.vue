@@ -3,7 +3,7 @@
   <el-card class="search">
     <el-row>
       <el-col :span="20">
-        <el-input v-model="searchName" placeholder="用户名"></el-input>
+        <el-input v-model="searchName" placeholder="用户名" clearable></el-input>
         <el-button type="primary" @click="handleSearch">查询</el-button>
       </el-col>
       <el-col :span="4" align="right">
@@ -44,10 +44,10 @@
     @current-change="handleCurrentChange"
   />
   <!-- 对话框 -->
-  <el-dialog v-model="dialogVisible" :title="dialogTitle" width="500px">
+  <el-dialog v-model="dialogVisible" :title="dialogTitle" @close="handleCancel" width="500px">
     <el-form :model="formData" ref="formRef" :rules="formRules" label-width="70px">
       <el-form-item label="用户名:" prop="username">
-        <el-input v-model="formData.username" />
+        <el-input v-model="formData.username" :readonly="dialogTitle == '编辑'" />
       </el-form-item>
       <el-form-item label="邮箱:" prop="email">
         <el-input v-model="formData.email" />
@@ -211,6 +211,7 @@ const handlecConfirm = () => {
 };
 // 取消
 const handleCancel = () => {
+  formRef.value.resetFields();
   dialogVisible.value = false;
 };
 // 查询
